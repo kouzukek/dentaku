@@ -14,7 +14,9 @@ export const mainSlice = createSlice({
       state.display = `${state.display}${payload}`;
     },
     pushOperator: (state, { payload }: PayloadAction<string>) => {
-      if (payload === "=") state.display = eval(state.display);
+      if (payload === "=")
+        // eslint-disable-next-line  no-eval
+        state.display = eval(state.display);
       else state.display = `${state.display}${payload}`;
     },
     pushClear: state => {
