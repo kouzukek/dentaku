@@ -1,28 +1,33 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "antd";
 
-import { mainSlice } from "../app/store";
+import { dentaku, digit, operator } from "../app/store";
 
-export const NumericKey: React.FC<{ number: number }> = ({ number }) => {
+const style = {
+  width: "100%",
+};
+
+export const NumericKey: React.FC<{ number: digit }> = ({ number }) => {
   const dispatch = useDispatch();
   const onClick = () => {
-    dispatch(mainSlice.actions.pushNumber(number));
+    dispatch(dentaku.actions.pushNumber(number));
   };
   return (
-    <Button onClick={onClick} style={{ width: "100%" }}>
+    <Button onClick={onClick} style={style}>
       {number}
     </Button>
   );
 };
 
 export const DotKey: React.FC = () => {
+  const disabled = useSelector((state) => state.main.decimal);
   const dispatch = useDispatch();
   const onClick = () => {
-    dispatch(mainSlice.actions.pushDot());
+    dispatch(dentaku.actions.pushDot());
   };
   return (
-    <Button onClick={onClick} style={{ width: "100%" }}>
+    <Button onClick={onClick} style={style} disabled={disabled}>
       .
     </Button>
   );
@@ -31,22 +36,23 @@ export const DotKey: React.FC = () => {
 export const ClearKey: React.FC = () => {
   const dispatch = useDispatch();
   const onClick = () => {
-    dispatch(mainSlice.actions.pushClear());
+    dispatch(dentaku.actions.pushClear());
   };
   return (
-    <Button onClick={onClick} style={{ width: "100%" }}>
+    <Button onClick={onClick} style={style}>
       C
     </Button>
   );
 };
 
-export const OperatorKey: React.FC<{ operator: string }> = ({ operator }) => {
+export const OperatorKey: React.FC<{ operator: operator }> = ({ operator }) => {
+  const primary = useSelector((state) => state.main.op) === operator;
   const dispatch = useDispatch();
   const onClick = () => {
-    dispatch(mainSlice.actions.pushOperator(operator));
+    dispatch(dentaku.actions.pushOperator(operator));
   };
   return (
-    <Button onClick={onClick} style={{ width: "100%" }}>
+    <Button onClick={onClick} style={style} type={primary ? "primary" : undefined}>
       {operator}
     </Button>
   );
