@@ -11,7 +11,7 @@ const style = {
 export const NumericKey: React.FC<{ number: digit }> = ({ number }) => {
   const dispatch = useDispatch();
   const onClick = () => {
-    dispatch(dentaku.actions.pushNumber(number));
+    dispatch(dentaku.actions.pushDigit(number));
   };
   return (
     <Button onClick={onClick} style={style}>
@@ -21,13 +21,13 @@ export const NumericKey: React.FC<{ number: digit }> = ({ number }) => {
 };
 
 export const DotKey: React.FC = () => {
-  const disabled = useSelector((state) => state.main.decimal);
+  const disabled = useSelector((state) => state.dentaku.decimal);
   const dispatch = useDispatch();
   const onClick = () => {
     dispatch(dentaku.actions.pushDot());
   };
   return (
-    <Button onClick={onClick} style={style} disabled={disabled}>
+    <Button onClick={onClick} style={style} type={disabled ? "primary" : undefined}>
       .
     </Button>
   );
@@ -46,7 +46,7 @@ export const ClearKey: React.FC = () => {
 };
 
 export const OperatorKey: React.FC<{ operator: operator }> = ({ operator }) => {
-  const primary = useSelector((state) => state.main.op) === operator;
+  const primary = useSelector((state) => state.dentaku.op) === operator;
   const dispatch = useDispatch();
   const onClick = () => {
     dispatch(dentaku.actions.pushOperator(operator));

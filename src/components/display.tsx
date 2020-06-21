@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 export const Display = () => {
-  const display = useSelector((state) => state.main.display);
+  const display = useSelector((state) => state.dentaku.display);
   return (
     <div
       style={{
