@@ -58,6 +58,19 @@ export const OperatorKey: React.FC<{ operator: operator }> = ({ operator }) => {
   );
 };
 
+export const EqualKey: React.FC = () => {
+  const primary = useSelector((state) => state.dentaku.mode) === "equaled";
+  const dispatch = useDispatch();
+  const onClick = () => {
+    dispatch(dentaku.actions.pushEqual());
+  };
+  return (
+    <Button onClick={onClick} style={style} type={primary ? "primary" : undefined}>
+      =
+    </Button>
+  );
+};
+
 export const DummyKey: React.FC<{ text: string }> = ({ text }) => {
   return <Button style={{ width: "100%" }}>{text}</Button>;
 };

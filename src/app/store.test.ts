@@ -24,7 +24,7 @@ describe("", () => {
     store.dispatch(dentaku.actions.pushOperator("+"));
     store.dispatch(dentaku.actions.pushDigit(1));
 
-    store.dispatch(dentaku.actions.pushOperator("="));
+    store.dispatch(dentaku.actions.pushEqual());
     expect(store.getState().main.display).toBe("2");
   });
 
@@ -45,7 +45,7 @@ describe("", () => {
     store.dispatch(dentaku.actions.pushDigit(4));
     store.dispatch(dentaku.actions.pushDigit(5));
 
-    store.dispatch(dentaku.actions.pushOperator("="));
+    store.dispatch(dentaku.actions.pushEqual());
     expect(store.getState().main.display).toBe("168.573");
   });
 
@@ -54,7 +54,7 @@ describe("", () => {
     store.dispatch(dentaku.actions.pushOperator("-"));
     store.dispatch(dentaku.actions.pushDigit(2));
 
-    store.dispatch(dentaku.actions.pushOperator("="));
+    store.dispatch(dentaku.actions.pushEqual());
     expect(store.getState().main.display).toBe("1");
   });
 
@@ -63,7 +63,7 @@ describe("", () => {
     store.dispatch(dentaku.actions.pushOperator("*"));
     store.dispatch(dentaku.actions.pushDigit(2));
 
-    store.dispatch(dentaku.actions.pushOperator("="));
+    store.dispatch(dentaku.actions.pushEqual());
     expect(store.getState().main.display).toBe("6");
   });
 
@@ -75,7 +75,7 @@ describe("", () => {
     store.dispatch(dentaku.actions.pushDot());
     store.dispatch(dentaku.actions.pushDigit(1));
 
-    store.dispatch(dentaku.actions.pushOperator("="));
+    store.dispatch(dentaku.actions.pushEqual());
     expect(store.getState().main.display).toBe("0.01");
   });
 
@@ -84,7 +84,7 @@ describe("", () => {
     store.dispatch(dentaku.actions.pushOperator("/"));
     store.dispatch(dentaku.actions.pushDigit(2));
 
-    store.dispatch(dentaku.actions.pushOperator("="));
+    store.dispatch(dentaku.actions.pushEqual());
     expect(store.getState().main.display).toBe("1.5");
   });
 
@@ -93,10 +93,10 @@ describe("", () => {
     store.dispatch(dentaku.actions.pushOperator("-"));
     store.dispatch(dentaku.actions.pushDigit(2));
 
-    store.dispatch(dentaku.actions.pushOperator("="));
+    store.dispatch(dentaku.actions.pushEqual());
     store.dispatch(dentaku.actions.pushOperator("+"));
     store.dispatch(dentaku.actions.pushDigit(3));
-    store.dispatch(dentaku.actions.pushOperator("="));
+    store.dispatch(dentaku.actions.pushEqual());
 
     expect(store.getState().main.display).toBe("4");
   });
@@ -106,14 +106,34 @@ describe("", () => {
     store.dispatch(dentaku.actions.pushOperator("+"));
     store.dispatch(dentaku.actions.pushDigit(1));
 
-    store.dispatch(dentaku.actions.pushOperator("="));
+    store.dispatch(dentaku.actions.pushEqual());
     expect(store.getState().main.display).toBe("2");
 
     store.dispatch(dentaku.actions.pushDigit(1));
     store.dispatch(dentaku.actions.pushOperator("+"));
     store.dispatch(dentaku.actions.pushDigit(1));
 
-    store.dispatch(dentaku.actions.pushOperator("="));
+    store.dispatch(dentaku.actions.pushEqual());
     expect(store.getState().main.display).toBe("2");
+  });
+
+  it("[1] [+] [1] [+] [1] [=]", () => {
+    store.dispatch(dentaku.actions.pushDigit(1));
+    store.dispatch(dentaku.actions.pushOperator("+"));
+    store.dispatch(dentaku.actions.pushDigit(1));
+    store.dispatch(dentaku.actions.pushOperator("+"));
+    expect(store.getState().main.display).toBe("2");
+    store.dispatch(dentaku.actions.pushDigit(1));
+    store.dispatch(dentaku.actions.pushEqual());
+    expect(store.getState().main.display).toBe("3");
+  });
+
+  it("[1] [*] [-] [2] [=]", () => {
+    store.dispatch(dentaku.actions.pushDigit(1));
+    store.dispatch(dentaku.actions.pushOperator("*"));
+    store.dispatch(dentaku.actions.pushOperator("-"));
+    store.dispatch(dentaku.actions.pushDigit(2));
+    store.dispatch(dentaku.actions.pushEqual());
+    expect(store.getState().main.display).toBe("-1");
   });
 });

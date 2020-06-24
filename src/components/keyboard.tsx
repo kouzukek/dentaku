@@ -1,25 +1,12 @@
 import React from "react";
 import { Row, Col } from "antd";
+import { chunk } from "lodash";
 
-import { NumericKey, DotKey, OperatorKey, ClearKey } from "./key";
-
-const split = <T extends any>(arr: Array<T>, cols: number): T[][] => {
-  const ret: T[][] = [];
-
-  let i = 0;
-
-  while (true) {
-    ret.push(arr.slice(i, Math.min(i + cols, arr.length)));
-    if (i + cols >= arr.length) break;
-    i += cols;
-  }
-
-  return ret;
-};
+import { NumericKey, DotKey, OperatorKey, ClearKey, EqualKey } from "./key";
 
 export const Keyboard = () => (
   <>
-    {split(
+    {chunk(
       [
         <ClearKey />,
         <></>,
@@ -39,8 +26,8 @@ export const Keyboard = () => (
         <OperatorKey operator="-" />,
         <NumericKey number={0} />,
         <DotKey />,
-        <OperatorKey operator="=" />,
-        <OperatorKey operator="+" />
+        <EqualKey />,
+        <OperatorKey operator="+" />,
       ],
       4
     ).map((col, i) => (

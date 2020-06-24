@@ -3,14 +3,14 @@ import bignumber from "bignumber.js";
 
 type NumericType = string;
 export type digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-export type operator = "+" | "-" | "*" | "/" | "=";
+export type operator = "+" | "-" | "*" | "/";
 
 export interface State {
   acc: NumericType;
   cur: NumericType;
   decimal: boolean;
-  op?: operator;
-  previous: "number" | "operator" | "equaled";
+  op: operator | null;
+  mode: "number" | "operator" | "equaled" | "initial";
   display: string;
 }
 
@@ -35,12 +35,12 @@ const pushDot = (state: State) => {
 };
 
 const pushNumber = (state: State, func: () => void) => {
-  if (state.previous === "equaled") {
+  if (state.mode === "equaled") {
     resetCur(state);
   }
   func();
   state.display = display(state.cur);
-  state.previous = "number";
+  state.mode = "number";
 };
 
 const equal = (state: State) => {
@@ -60,6 +60,7 @@ const equal = (state: State) => {
   }
   state.acc = "0";
   state.decimal = false;
+  state.op = null;
   state.display = display(state.cur);
 };
 
@@ -87,8 +88,8 @@ const initialize = (): State => ({
   acc: "0",
   cur: "0",
   decimal: false,
-  op: undefined,
-  previous: "equaled",
+  op: null,
+  mode: "initial",
   display: "0",
 });
 
@@ -99,22 +100,17 @@ export const dentaku = createSlice({
     pushDigit: (state, { payload: number }: PayloadAction<digit>) =>
       pushNumber(state, () => pushDigit(state, number)),
     pushOperator: (state, { payload: operator }: PayloadAction<operator>) => {
-      switch (operator) {
-        case "+":
-        case "-":
-        case "*":
-        case "/":
-          if (state.op !== "=") equal(state);
-          state.acc = state.cur;
-          resetCur(state);
-          state.previous = "operator";
-          break;
-        case "=":
-          equal(state);
-          state.previous = "equaled";
-          break;
+      if (state.mode !== "operator") {
+        if (state.op !== null) equal(state);
+        state.acc = state.cur;
+        resetCur(state);
       }
+      state.mode = "operator";
       state.op = operator;
+    },
+    pushEqual: (state) => {
+      equal(state);
+      state.mode = "equaled";
     },
     pushClear: () => initialize(),
     pushDot: (state) => pushNumber(state, () => pushDot(state)),
