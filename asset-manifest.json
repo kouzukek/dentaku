@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/dentaku/static/css/main.1f82d0f7.chunk.css",
-    "main.js": "/dentaku/static/js/main.82108097.chunk.js",
-    "main.js.map": "/dentaku/static/js/main.82108097.chunk.js.map",
+    "main.js": "/dentaku/static/js/main.3ef1b48e.chunk.js",
+    "main.js.map": "/dentaku/static/js/main.3ef1b48e.chunk.js.map",
     "runtime-main.js": "/dentaku/static/js/runtime-main.a29d36b4.js",
     "runtime-main.js.map": "/dentaku/static/js/runtime-main.a29d36b4.js.map",
     "static/css/2.a2026422.chunk.css": "/dentaku/static/css/2.a2026422.chunk.css",
-    "static/js/2.2b9ce999.chunk.js": "/dentaku/static/js/2.2b9ce999.chunk.js",
-    "static/js/2.2b9ce999.chunk.js.map": "/dentaku/static/js/2.2b9ce999.chunk.js.map",
+    "static/js/2.47398d94.chunk.js": "/dentaku/static/js/2.47398d94.chunk.js",
+    "static/js/2.47398d94.chunk.js.map": "/dentaku/static/js/2.47398d94.chunk.js.map",
     "index.html": "/dentaku/index.html",
-    "precache-manifest.fec16c601220902f53e3ed36a967948a.js": "/dentaku/precache-manifest.fec16c601220902f53e3ed36a967948a.js",
+    "precache-manifest.7122d603d6d38fac14fc3c5112bdf649.js": "/dentaku/precache-manifest.7122d603d6d38fac14fc3c5112bdf649.js",
     "service-worker.js": "/dentaku/service-worker.js",
     "static/css/2.a2026422.chunk.css.map": "/dentaku/static/css/2.a2026422.chunk.css.map",
     "static/css/main.1f82d0f7.chunk.css.map": "/dentaku/static/css/main.1f82d0f7.chunk.css.map",
-    "static/js/2.2b9ce999.chunk.js.LICENSE.txt": "/dentaku/static/js/2.2b9ce999.chunk.js.LICENSE.txt"
+    "static/js/2.47398d94.chunk.js.LICENSE.txt": "/dentaku/static/js/2.47398d94.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a29d36b4.js",
     "static/css/2.a2026422.chunk.css",
-    "static/js/2.2b9ce999.chunk.js",
+    "static/js/2.47398d94.chunk.js",
     "static/css/main.1f82d0f7.chunk.css",
-    "static/js/main.82108097.chunk.js"
+    "static/js/main.3ef1b48e.chunk.js"
   ]
 }
